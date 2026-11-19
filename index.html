@@ -8,99 +8,52 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="El Meu Arxiu">
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --bg: #eef9fa; --card: #ffffff; --text: #384952; --muted: #768c96;
-            --border: #cde8ec; --aqua-soft: #dcf4f7; --aqua-accent: #2b9eb3;
-            --blue-soft: #e3efff; --blue-text: #4a7bc7; --lav-soft: #efeaff;
-            --lav-text: #7a63bd; --peach-soft: #fff0e5; --peach-text: #c9733e;
-            --mint-soft: #e0f7ed; --mint-text: #2e8b66;
-            --shadow: 0 4px 14px rgba(43, 158, 179, 0.08);
-        }
-        body {
-            font-family: 'Quicksand', sans-serif; line-height: 1.6; color: var(--text);
-            background-color: var(--bg); max-width: 780px; margin: 0 auto; padding: 1.5rem 1.2rem 4rem 1.2rem;
-        }
-        header { text-align: center; margin-bottom: 1.4rem; }
-        h1 { font-size: 1.75rem; margin: 0; }
-        p.subtitle { color: var(--muted); margin: 0.2rem 0 0.9rem 0; font-size: 0.95rem; }
-        .btn-nou {
-            background: var(--aqua-accent); color: white; border: none; padding: 0.6rem 1.3rem;
-            border-radius: 99px; font-family: inherit; font-weight: 700; font-size: 0.92rem; cursor: pointer;
-        }
-        #formulari-nou {
-            display: none; background: var(--card); border: 2px solid var(--aqua-accent);
-            border-radius: 20px; padding: 1.3rem; margin: 1.2rem 0 1.8rem 0;
-        }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.7rem; margin-bottom: 0.7rem; }
-        .form-input {
-            width: 100%; padding: 0.65rem 0.9rem; font-family: inherit; font-size: 0.9rem;
-            border: 1.5px solid var(--border); border-radius: 12px; box-sizing: border-box;
-            background: #fafdfe; margin-bottom: 0.7rem;
-        }
-        .form-grid .form-input { margin-bottom: 0; }
-        .form-actions { display: flex; gap: 0.6rem; justify-content: flex-end; }
-        .btn-guardar { background: var(--mint-text); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 12px; font-weight: 700; cursor: pointer; }
-        .btn-cancelar { background: var(--aqua-soft); color: var(--text); border: none; padding: 0.6rem 1rem; border-radius: 12px; font-weight: 600; cursor: pointer; }
-        .carpetas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 0.7rem; margin-bottom: 1.4rem; }
-        .carpeta-card {
-            background: var(--card); border: 2px solid var(--border); border-radius: 18px;
-            padding: 0.8rem 0.6rem; text-align: center; cursor: pointer; box-shadow: var(--shadow);
-        }
-        .carpeta-card.activa { background: var(--aqua-soft); border-color: var(--aqua-accent); }
-        .carpeta-icono { font-size: 1.45rem; display: block; margin-bottom: 0.15rem; }
-        .carpeta-nombre { font-weight: 700; font-size: 0.86rem; display: block; line-height: 1.2; }
-        .carpeta-contador { font-size: 0.74rem; color: var(--muted); }
-        .controles { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 0.6rem; margin-bottom: 1rem; }
-        @media (max-width: 600px) { .controles { grid-template-columns: 1fr; } }
-        #buscador, .select-filtro {
-            padding: 0.65rem 0.9rem; font-family: inherit; font-size: 0.9rem;
-            border: 2px solid var(--border); border-radius: 14px; background: var(--card); color: var(--text);
-        }
-        .barra-etiquetes { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.3rem; align-items: center; }
-        .tag-chip {
-            background: var(--card); border: 1.5px solid var(--border); color: var(--aqua-accent);
-            font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; cursor: pointer;
-        }
-        .tag-chip.activa { background: var(--aqua-accent); color: white; border-color: var(--aqua-accent); }
-        .entrada {
-            background: var(--card); border: 2px solid var(--border); border-radius: 20px;
-            padding: 1.2rem 1.3rem; margin-bottom: 1rem; box-shadow: var(--shadow);
-        }
-        .entrada.leido { background: #f8fcfd; border-color: #dcebef; opacity: 0.8; }
-        .meta { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; font-size: 0.76rem; margin-bottom: 0.55rem; }
-        .badge { font-weight: 700; padding: 3px 9px; border-radius: 99px; }
-        .badge-tema { background: var(--aqua-soft); color: var(--aqua-accent); }
-        .badge-cat2 { background: var(--peach-soft); color: var(--peach-text); }
-        .badge-fuente { background: var(--lav-soft); color: var(--lav-text); }
-        .fecha { color: var(--muted); }
-        .btn-check {
-            margin-left: auto; background: var(--card); border: 1.5px solid var(--border); border-radius: 99px;
-            padding: 4px 11px; font-family: inherit; font-size: 0.76rem; font-weight: 700; cursor: pointer; color: var(--muted);
-        }
-        .entrada.leido .btn-check { background: var(--mint-soft); color: var(--mint-text); border-color: #b8ebd5; }
-        h2 { font-size: 1.12rem; margin: 0.2rem 0 0.4rem 0; }
-        a { color: var(--text); text-decoration: none; border-bottom: 2px solid var(--aqua-soft); }
-        a:hover { color: var(--aqua-accent); border-bottom-color: var(--aqua-accent); }
-        .resum { margin: 0.3rem 0 0.6rem 0; font-size: 0.92rem; color: #51646e; }
-        .etiquetes-llista { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.6rem; }
-        .hashtag {
-            font-size: 0.76rem; font-weight: 700; color: var(--blue-text);
-            background: var(--blue-soft); padding: 2px 8px; border-radius: 8px; cursor: pointer;
-        }
-        .notes-box { margin-top: 0.7rem; padding-top: 0.6rem; border-top: 1px dashed var(--border); }
-        .notes-toggle { background: none; border: none; color: var(--muted); font-family: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; padding: 0; }
-        .notes-area {
-            width: 100%; margin-top: 0.4rem; padding: 0.6rem; font-family: inherit; font-size: 0.86rem;
-            border: 1.5px solid var(--border); border-radius: 12px; background: #f7fcfd; box-sizing: border-box; min-height: 60px;
-        }
-        .btn-copiar-html {
-            margin-top: 0.5rem; background: var(--blue-soft); color: var(--blue-text); border: none;
-            padding: 4px 10px; border-radius: 8px; font-family: inherit; font-size: 0.75rem; font-weight: 700; cursor: pointer;
-        }
+        :root { --bg:#eef9fa; --card:#fff; --text:#384952; --muted:#768c96; --border:#cde8ec; --aqua-soft:#dcf4f7; --aqua-accent:#2b9eb3; --blue-soft:#e3efff; --blue-text:#4a7bc7; --lav-soft:#efeaff; --lav-text:#7a63bd; --peach-soft:#fff0e5; --peach-text:#c9733e; --mint-soft:#e0f7ed; --mint-text:#2e8b66; --shadow:0 4px 14px rgba(43,158,179,0.08); }
+        body { font-family:'Quicksand',sans-serif; line-height:1.6; color:var(--text); background:var(--bg); max-width:780px; margin:0 auto; padding:1.5rem 1.2rem 4rem; }
+        header { text-align:center; margin-bottom:1.4rem; }
+        h1 { font-size:1.75rem; margin:0; }
+        p.subtitle { color:var(--muted); margin:0.2rem 0 0.9rem; font-size:0.95rem; }
+        .btn-nou { background:var(--aqua-accent); color:#fff; border:none; padding:0.6rem 1.3rem; border-radius:99px; font-family:inherit; font-weight:700; font-size:0.92rem; cursor:pointer; }
+        #formulari-nou { display:none; background:var(--card); border:2px solid var(--aqua-accent); border-radius:20px; padding:1.3rem; margin:1.2rem 0 1.8rem; }
+        .form-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0.7rem; margin-bottom:0.7rem; }
+        .form-input { width:100%; padding:0.65rem 0.9rem; font-family:inherit; font-size:0.9rem; border:1.5px solid var(--border); border-radius:12px; box-sizing:border-box; background:#fafdfe; margin-bottom:0.7rem; }
+        .form-grid .form-input { margin-bottom:0; }
+        .form-actions { display:flex; gap:0.6rem; justify-content:flex-end; }
+        .btn-guardar { background:var(--mint-text); color:#fff; border:none; padding:0.6rem 1.2rem; border-radius:12px; font-weight:700; cursor:pointer; }
+        .btn-cancelar { background:var(--aqua-soft); color:var(--text); border:none; padding:0.6rem 1rem; border-radius:12px; font-weight:600; cursor:pointer; }
+        .carpetas-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(145px,1fr)); gap:0.7rem; margin-bottom:1.4rem; }
+        .carpeta-card { background:var(--card); border:2px solid var(--border); border-radius:18px; padding:0.8rem 0.6rem; text-align:center; cursor:pointer; box-shadow:var(--shadow); }
+        .carpeta-card.activa { background:var(--aqua-soft); border-color:var(--aqua-accent); }
+        .carpeta-icono { font-size:1.45rem; display:block; margin-bottom:0.15rem; }
+        .carpeta-nombre { font-weight:700; font-size:0.86rem; display:block; line-height:1.2; }
+        .carpeta-contador { font-size:0.74rem; color:var(--muted); }
+        .controles { display:grid; grid-template-columns:1.5fr 1fr 1fr; gap:0.6rem; margin-bottom:1rem; }
+        @media (max-width:600px) { .controles { grid-template-columns:1fr; } }
+        #buscador, .select-filtro { padding:0.65rem 0.9rem; font-family:inherit; font-size:0.9rem; border:2px solid var(--border); border-radius:14px; background:var(--card); color:var(--text); }
+        .barra-etiquetes { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.3rem; align-items:center; }
+        .tag-chip { background:var(--card); border:1.5px solid var(--border); color:var(--aqua-accent); font-size:0.78rem; font-weight:700; padding:3px 10px; border-radius:99px; cursor:pointer; }
+        .tag-chip.activa { background:var(--aqua-accent); color:#fff; border-color:var(--aqua-accent); }
+        .entrada { background:var(--card); border:2px solid var(--border); border-radius:20px; padding:1.2rem 1.3rem; margin-bottom:1rem; box-shadow:var(--shadow); }
+        .entrada.leido { background:#f8fcfd; border-color:#dcebef; opacity:0.8; }
+        .meta { display:flex; align-items:center; flex-wrap:wrap; gap:0.4rem; font-size:0.76rem; margin-bottom:0.55rem; }
+        .badge { font-weight:700; padding:3px 9px; border-radius:99px; }
+        .badge-tema { background:var(--aqua-soft); color:var(--aqua-accent); }
+        .badge-cat2 { background:var(--peach-soft); color:var(--peach-text); }
+        .badge-fuente { background:var(--lav-soft); color:var(--lav-text); }
+        .fecha { color:var(--muted); }
+        .btn-check { margin-left:auto; background:var(--card); border:1.5px solid var(--border); border-radius:99px; padding:4px 11px; font-family:inherit; font-size:0.76rem; font-weight:700; cursor:pointer; color:var(--muted); }
+        .entrada.leido .btn-check { background:var(--mint-soft); color:var(--mint-text); border-color:#b8ebd5; }
+        h2 { font-size:1.12rem; margin:0.2rem 0 0.4rem; }
+        a { color:var(--text); text-decoration:none; border-bottom:2px solid var(--aqua-soft); }
+        .resum { margin:0.3rem 0 0.6rem; font-size:0.92rem; color:#51646e; }
+        .etiquetes-llista { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.6rem; }
+        .hashtag { font-size:0.76rem; font-weight:700; color:var(--blue-text); background:var(--blue-soft); padding:2px 8px; border-radius:8px; cursor:pointer; }
+        .notes-box { margin-top:0.7rem; padding-top:0.6rem; border-top:1px dashed var(--border); }
+        .notes-toggle { background:none; border:none; color:var(--muted); font-family:inherit; font-size:0.8rem; font-weight:700; cursor:pointer; padding:0; }
+        .notes-area { width:100%; margin-top:0.4rem; padding:0.6rem; font-family:inherit; font-size:0.86rem; border:1.5px solid var(--border); border-radius:12px; background:#f7fcfd; box-sizing:border-box; min-height:60px; }
+        .btn-copiar-html { margin-top:0.5rem; background:var(--blue-soft); color:var(--blue-text); border:none; padding:4px 10px; border-radius:8px; font-family:inherit; font-size:0.75rem; font-weight:700; cursor:pointer; }
     </style>
 </head>
 <body>
@@ -111,7 +64,7 @@
     </header>
 
     <section id="formulari-nou">
-        <h3 style="margin:0 0 1rem 0; color:var(--aqua-accent);">✨ Nou recurs per a l'arxiu</h3>
+        <h3 style="margin:0 0 1rem; color:var(--aqua-accent);">✨ Nou recurs per a l'arxiu</h3>
         <input type="text" id="nou-titol" class="form-input" placeholder="Títol de l'enllaç o de la idea...">
         <input type="url" id="nou-url" class="form-input" placeholder="Enllaç https://... (opcional si és només text)">
         <div class="form-grid">
@@ -120,7 +73,7 @@
                 <option value="filosofia">🦉 Filosofia</option>
                 <option value="ia">🤖 Intel·ligència Artificial</option>
                 <option value="art">🎨 Art i Literatura</option>
-                <option value="feina">🛡️ Feina (Policia)</option>
+                <option value="feina">🛡️ Feina</option>
                 <option value="creixement">🌱 Creixement Personal</option>
             </select>
             <select id="nou-cat2" class="form-input">
@@ -147,3 +100,7 @@
     <section class="carpetas-grid" id="contenedor-carpetas">
         <div class="carpeta-card activa" data-tema="todas"><span class="carpeta-icono">🗂️</span><span class="carpeta-nombre">Tot</span><span class="carpeta-contador" id="count-todas">0 items</span></div>
         <div class="carpeta-card" data-tema="psicologia"><span class="carpeta-icono">🧠</span><span class="carpeta-nombre">Psicologia</span><span class="carpeta-contador" id="count-psicologia">0 items</span></div>
+        <div class="carpeta-card" data-tema="filosofia"><span class="carpeta-icono">🦉</span><span class="carpeta-nombre">Filosofia</span><span class="carpeta-contador" id="count-filosofia">0 items</span></div>
+        <div class="carpeta-card" data-tema="ia"><span class="carpeta-icono">🤖</span><span class="carpeta-nombre">Intel·ligència Artificial</span><span class="carpeta-contador" id="count-ia">0 items</span></div>
+        <div class="carpeta-card" data-tema="art"><span class="carpeta-icono">🎨</span><span class="carpeta-nombre">Art i Literatura</span><span class="carpeta-contador" id="count-art">0 items</span></div>
+        <div class="carpeta-card" data-tema="feina"><span class="carpeta-icono">🛡️</span><span class="carpeta-nombre">Feina (Policia)</span><span class="carpeta-contador" id="count-feina">0 items</span></div>
