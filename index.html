@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>El meu raconet de lectures ☁️</title>
+<title>Biblioteca de butxaca ☁️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
@@ -99,8 +99,8 @@ button.ghost:hover{box-shadow:0 3px 0 #d8e6f3}
 <body>
 <div class="wrap">
   <header>
-    <h1>☁️ El meu raconet de lectures 🌸</h1>
-    <p>Tot el que vull llegir, ben guardadet ✨</p>
+    <h1>Biblioteca de butxaca ☁️</h1>
+    <p>Jardí digital d'idees, lectures i troballes ✨</p>
     <div class="stats" id="stats"></div>
   </header>
 
@@ -114,7 +114,7 @@ button.ghost:hover{box-shadow:0 3px 0 #d8e6f3}
       <div><label for="f-src">Font</label><select id="f-src"></select></div>
       <div><label for="f-tags">Etiquetes (separades per comes)</label><input id="f-tags" placeholder="ansietat, somni, hàbits"></div>
       <div class="full"><label for="f-sum">Resum</label><textarea id="f-sum" placeholder="De què va, en dues línies…"></textarea></div>
-      <div class="full"><button type="submit">Guardar 💖</button></div>
+      <div class="full"><button type="submit">Guardar 💾</button></div>
     </form>
     <p class="hint">Per als PDFs: puja'ls a una carpeta <b>pdfs/</b> del repositori i posa-hi la ruta relativa.</p>
   </details>
@@ -161,7 +161,7 @@ const SRCS = [
   {id:'video', label:'🎬 Vídeo', c:'var(--peach)'}
 ];
 const READ = [
-  {id:'no', label:'🫧 Per llegir', c:'var(--sky)'},
+  {id:'no', label:'📖 Per llegir', c:'var(--sky)'},
   {id:'si', label:'✅ Llegit', c:'var(--mint)'}
 ];
 const KEY = 'raconet-lectures-v1';
@@ -235,7 +235,7 @@ function render(){
 
   const done = items.filter(i=>i.read).length;
   $('#stats').innerHTML='';
-  [`📚 ${items.length} guardades`,`✅ ${done} llegides`,`🫧 ${items.length-done} pendents`].forEach(t=>$('#stats').append(el('span',{class:'stat',text:t})));
+  [`📚 ${items.length} guardades`,`✅ ${done} llegides`,`📖 ${items.length-done} pendents`].forEach(t=>$('#stats').append(el('span',{class:'stat',text:t})));
 }
 
 function card(it){
