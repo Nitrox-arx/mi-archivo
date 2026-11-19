@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Archivo ✨</title>
+    <title>El Meu Arxiu 🩵</title>
     
-    <!-- Configuración App móvil iOS y Android -->
+    <!-- Configuració App mòbil iOS i Android -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="Mi Archivo">
+    <meta name="apple-mobile-web-app-title" content="El Meu Arxiu">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <!-- Fuente redondeada amigable (Quicksand) -->
+    <!-- Font arrodonida amigable -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #fff9fb;
+            --bg: #eef9fa;
             --card: #ffffff;
-            --text: #4a4246;
-            --muted: #8e8288;
-            --border: #f2dce4;
-            --pink-soft: #ffe6ef;
-            --pink-accent: #e57a9e;
+            --text: #384952;
+            --muted: #768c96;
+            --border: #cde8ec;
+            --aqua-soft: #dcf4f7;
+            --aqua-accent: #2b9eb3;
+            --blue-soft: #e3efff;
+            --blue-text: #4a7bc7;
             --lav-soft: #efeaff;
-            --lav-text: #7462b8;
-            --mint-soft: #e3f7ee;
-            --mint-text: #3b8c6a;
-            --shadow: 0 4px 14px rgba(229, 122, 158, 0.08);
+            --lav-text: #7a63bd;
+            --peach-soft: #fff0e5;
+            --peach-text: #c9733e;
+            --mint-soft: #e0f7ed;
+            --mint-text: #2e8b66;
+            --shadow: 0 4px 14px rgba(43, 158, 179, 0.08);
         }
 
         body {
@@ -37,38 +41,116 @@
             line-height: 1.6;
             color: var(--text);
             background-color: var(--bg);
-            max-width: 740px;
+            max-width: 780px;
             margin: 0 auto;
-            padding: 1.5rem 1.2rem 3rem 1.2rem;
+            padding: 1.5rem 1.2rem 4rem 1.2rem;
         }
 
         header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
         }
         h1 {
-            font-size: 1.7rem;
+            font-size: 1.75rem;
             margin: 0;
             color: var(--text);
         }
         p.subtitle {
             color: var(--muted);
-            margin: 0.2rem 0 0 0;
+            margin: 0.2rem 0 0.9rem 0;
             font-size: 0.95rem;
         }
 
-        /* Sección de Carpetas Visuales */
+        /* Botó per obrir formulari */
+        .btn-nou {
+            background: var(--aqua-accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.3rem;
+            border-radius: 99px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: transform 0.15s ease;
+        }
+        .btn-nou:hover {
+            transform: scale(1.03);
+        }
+
+        /* Formulari per afegir recursos */
+        #formulari-nou {
+            display: none;
+            background: var(--card);
+            border: 2px solid var(--aqua-accent);
+            border-radius: 20px;
+            padding: 1.3rem;
+            margin: 1.2rem 0 1.8rem 0;
+            box-shadow: var(--shadow);
+        }
+        #formulari-nou h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+            color: var(--aqua-accent);
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.7rem;
+            margin-bottom: 0.7rem;
+        }
+        .form-input {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            font-family: inherit;
+            font-size: 0.9rem;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            box-sizing: border-box;
+            color: var(--text);
+            background: #fafdfe;
+            margin-bottom: 0.7rem;
+        }
+        .form-grid .form-input { margin-bottom: 0; }
+        .form-actions {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: flex-end;
+        }
+        .btn-guardar {
+            background: var(--mint-text);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .btn-cancelar {
+            background: var(--aqua-soft);
+            color: var(--text);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Carpetes Visuals */
         .carpetas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-            gap: 0.75rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            gap: 0.7rem;
+            margin-bottom: 1.4rem;
         }
         .carpeta-card {
             background: var(--card);
             border: 2px solid var(--border);
             border-radius: 18px;
-            padding: 0.85rem 0.7rem;
+            padding: 0.8rem 0.6rem;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -76,53 +158,65 @@
         }
         .carpeta-card:hover {
             transform: translateY(-2px);
-            border-color: var(--pink-accent);
+            border-color: var(--aqua-accent);
         }
         .carpeta-card.activa {
-            background: var(--pink-soft);
-            border-color: var(--pink-accent);
+            background: var(--aqua-soft);
+            border-color: var(--aqua-accent);
         }
-        .carpeta-icono {
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 0.2rem;
-        }
-        .carpeta-nombre {
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: block;
-        }
-        .carpeta-contador {
-            font-size: 0.75rem;
-            color: var(--muted);
-        }
+        .carpeta-icono { font-size: 1.45rem; display: block; margin-bottom: 0.15rem; }
+        .carpeta-nombre { font-weight: 700; font-size: 0.86rem; display: block; line-height: 1.2; }
+        .carpeta-contador { font-size: 0.74rem; color: var(--muted); }
 
-        /* Barra de Filtros (Fuente + Buscador) */
+        /* Barra de Filtros */
         .controles {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
             gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
-        #buscador, #filtro-fuente {
-            padding: 0.7rem 1rem;
+        @media (max-width: 600px) {
+            .controles { grid-template-columns: 1fr; }
+        }
+        #buscador, .select-filtro {
+            padding: 0.65rem 0.9rem;
             font-family: inherit;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             border: 2px solid var(--border);
             border-radius: 14px;
             background: var(--card);
             color: var(--text);
             outline: none;
         }
-        #buscador {
-            flex: 1;
-            min-width: 200px;
-        }
-        #buscador:focus, #filtro-fuente:focus {
-            border-color: var(--pink-accent);
+        #buscador:focus, .select-filtro:focus {
+            border-color: var(--aqua-accent);
         }
 
-        /* Tarjetas de Enlaces y Textos */
+        /* Barra d'etiquetes actives dins de la carpeta */
+        .barra-etiquetes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.3rem;
+            align-items: center;
+        }
+        .tag-chip {
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            color: var(--aqua-accent);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 99px;
+            cursor: pointer;
+        }
+        .tag-chip.activa {
+            background: var(--aqua-accent);
+            color: white;
+            border-color: var(--aqua-accent);
+        }
+
+        /* Targetes d'Entrades */
         .entrada {
             background: var(--card);
             border: 2px solid var(--border);
@@ -133,36 +227,28 @@
             transition: all 0.2s ease;
         }
         .entrada.leido {
-            background: #fcfbfc;
-            border-color: #e8e2e5;
-            opacity: 0.78;
+            background: #f8fcfd;
+            border-color: #dcebef;
+            opacity: 0.8;
         }
 
         .meta {
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            gap: 0.45rem;
-            font-size: 0.78rem;
-            margin-bottom: 0.5rem;
+            gap: 0.4rem;
+            font-size: 0.76rem;
+            margin-bottom: 0.55rem;
         }
-        .badge-tema {
-            background: var(--pink-soft);
-            color: var(--pink-accent);
+        .badge {
             font-weight: 700;
-            padding: 3px 10px;
+            padding: 3px 9px;
             border-radius: 99px;
         }
-        .badge-fuente {
-            background: var(--lav-soft);
-            color: var(--lav-text);
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 99px;
-        }
-        .fecha {
-            color: var(--muted);
-        }
+        .badge-tema { background: var(--aqua-soft); color: var(--aqua-accent); }
+        .badge-cat2 { background: var(--peach-soft); color: var(--peach-text); }
+        .badge-fuente { background: var(--lav-soft); color: var(--lav-text); }
+        .fecha { color: var(--muted); }
 
         .btn-check {
             margin-left: auto;
@@ -171,20 +257,15 @@
             border-radius: 99px;
             padding: 4px 11px;
             font-family: inherit;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             font-weight: 700;
             cursor: pointer;
             color: var(--muted);
-            transition: all 0.15s ease;
-        }
-        .btn-check:hover {
-            border-color: var(--mint-text);
-            color: var(--mint-text);
         }
         .entrada.leido .btn-check {
             background: var(--mint-soft);
             color: var(--mint-text);
-            border-color: #bfe8d6;
+            border-color: #b8ebd5;
         }
 
         h2 {
@@ -195,97 +276,48 @@
         a {
             color: var(--text);
             text-decoration: none;
-            border-bottom: 2px solid var(--pink-soft);
+            border-bottom: 2px solid var(--aqua-soft);
         }
         a:hover {
-            color: var(--pink-accent);
-            border-bottom-color: var(--pink-accent);
+            color: var(--aqua-accent);
+            border-bottom-color: var(--aqua-accent);
         }
-        .nota {
-            margin: 0.4rem 0 0 0;
+        .resum {
+            margin: 0.3rem 0 0.6rem 0;
             font-size: 0.92rem;
-            color: #63595e;
+            color: #51646e;
         }
-    </style>
-</head>
-<body>
 
-    <header>
-        <h1>🌸 Mi Archivo</h1>
-        <p class="subtitle">Colección de enlaces, lecturas e ideas bonitas</p>
-    </header>
+        /* Etiquetes dins la targeta */
+        .etiquetes-llista {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.6rem;
+        }
+        .hashtag {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--blue-text);
+            background: var(--blue-soft);
+            padding: 2px 8px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
 
-    <!-- CARPETAS VISUALES POR TEMA -->
-    <section class="carpetas-grid" id="contenedor-carpetas">
-        <div class="carpeta-card activa" data-tema="todas">
-            <span class="carpeta-icono">🗂️</span>
-            <span class="carpeta-nombre">Todo</span>
-            <span class="carpeta-contador" id="count-todas">0 items</span>
-        </div>
-        <div class="carpeta-card" data-tema="diseno">
-            <span class="carpeta-icono">🎨</span>
-            <span class="carpeta-nombre">Diseño</span>
-            <span class="carpeta-contador" id="count-diseno">0 items</span>
-        </div>
-        <div class="carpeta-card" data-tema="lecturas">
-            <span class="carpeta-icono">📖</span>
-            <span class="carpeta-nombre">Lecturas</span>
-            <span class="carpeta-contador" id="count-lecturas">0 items</span>
-        </div>
-        <div class="carpeta-card" data-tema="ideas">
-            <span class="carpeta-icono">☁️</span>
-            <span class="carpeta-nombre">Ideas</span>
-            <span class="carpeta-contador" id="count-ideas">0 items</span>
-        </div>
-        <div class="carpeta-card" data-tema="pendientes">
-            <span class="carpeta-icono">🌷</span>
-            <span class="carpeta-nombre">Por leer</span>
-            <span class="carpeta-contador" id="count-pendientes">0 items</span>
-        </div>
-    </section>
-
-    <!-- BUSCADOR Y FILTRO POR FUENTE -->
-    <div class="controles">
-        <input type="text" id="buscador" placeholder="🔍 Buscar palabra clave...">
-        <select id="filtro-fuente">
-            <option value="todas">✨ Todas las fuentes</option>
-            <option value="articulo">📰 Artículo / Web</option>
-            <option value="video">🎬 Vídeo</option>
-            <option value="libro">📚 Libro</option>
-            <option value="nota">✏️ Nota propia</option>
-        </select>
-    </div>
-
-    <!-- LISTA DE ENTRADAS -->
-    <main id="lista-archivo">
-        
-        <!-- EJEMPLO 1 -->
-        <article class="entrada" id="item-1" data-tema="diseno" data-fuente="articulo">
-            <div class="meta">
-                <span class="badge-tema">🎨 Diseño</span>
-                <span class="badge-fuente">📰 Artículo</span>
-                <span class="fecha">19 Nov</span>
-                <button class="btn-check" onclick="toggleLeido('item-1')">○ Pendiente</button>
-            </div>
-            <h2><a href="https://ejemplo.com" target="_blank">Principios del diseño minimalista y amable</a></h2>
-            <p class="nota">Cómo usar espacios en blanco, esquinas redondeadas y paletas pastel sin perder claridad visual.</p>
-        </article>
-
-        <!-- EJEMPLO 2 -->
-        <article class="entrada leido" id="item-2" data-tema="lecturas" data-fuente="libro">
-            <div class="meta">
-                <span class="badge-tema">📖 Lecturas</span>
-                <span class="badge-fuente">📚 Libro</span>
-                <span class="fecha">18 Nov</span>
-                <button class="btn-check" onclick="toggleLeido('item-2')">✓ Leído</button>
-            </div>
-            <h2>Notas sobre curación digital y jardines web</h2>
-            <p class="nota">Idea clave: un archivo personal crece poco a poco como un pequeño jardín, sin prisas ni algoritmos.</p>
-        </article>
-
-        <!-- EJEMPLO 3 -->
-        <article class="entrada" id="item-3" data-tema="ideas" data-fuente="nota">
-            <div class="meta">
-                <span class="badge-tema">☁️ Ideas</span>
-                <span class="badge-fuente">✏️ Nota propia</span>
-                <span class="fecha">15 Nov</span>
+        /* Apartat de Notes Personals sota el resum */
+        .notes-box {
+            margin-top: 0.7rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed var(--border);
+        }
+        .notes-toggle {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+        }
